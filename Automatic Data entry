@@ -1,0 +1,73 @@
+Sub copy_data()
+
+  Dim rng As Range
+  Dim temp As Variant
+  Dim i As Long
+  Dim a As Long
+  Dim rng_dest As Range
+  
+  Application.ScreenUpdating = False
+  
+  i = 4
+  
+  Set rng_dest = Sheets("Sheet2").Range("E:P")
+  
+  ' This look for Bill Data sheet and and find empty row in columns D:H on sheet
+  
+  Do Until WorksheetFunction.CountA(rng_dest.Rows(i)) = 0
+  
+    i = i + 1
+    
+  Loop
+  
+  'Copy data from E11:I28 on sheet -Bill
+  
+  Set rng = Sheets("Sheet1").Range("B9:K23")
+  
+  ' This will Copy rows which have values to sheet -Bill data
+  
+  For a = 1 To rng.Rows.Count
+  
+    If WorksheetFunction.CountA(rng.Rows(a)) <> 0 Then
+    
+      rng_dest.Rows(i).Value = rng.Rows(a).Value
+      
+      'This will Copy Inv.No. from Sheet-Bill Cell- I6
+  
+      Sheets("Sheet2").Range("A" & i).Value = Sheets("Sheet1").Range("B1").Value
+        
+      'This will copy Inv Date from Bill
+      
+      Sheets("Sheet2").Range("B" & i).Value = Sheets("Sheet1").Range("I1").Value
+      
+      'This will Copy Local Transport name
+      
+      Sheets("Sheet2").Range("C" & i).Value = Sheets("Sheet1").Range("B6").Value
+      
+      'This will Copy GST No.
+      
+      Sheets("Sheet2").Range("D" & i).Value = Sheets("Sheet1").Range("H6").Value
+      
+      'This will Copy Total of Local
+      
+      Sheets("Sheet2").Range("O" & i).Value = Sheets("Sheet1").Range("K26").Value
+      
+      'This will Copy Total of Private
+      
+      Sheets("Sheet2").Range("P" & i).Value = Sheets("Sheet1").Range("K27").Value
+      
+      i = i + 1
+        
+    End If
+    
+  Next a
+  
+ 
+ 
+ 
+ 
+ Application.ScreenUpdating = True
+
+ 
+
+End Sub
